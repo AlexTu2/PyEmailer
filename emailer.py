@@ -97,19 +97,26 @@ def user_auth():
                 logout()
                 continue
         else:
-                print("Sending email")
+                print("Continuing with email program")
                 break
         
+def prompt_for_file():
+        while True:
+                file_path = input("Enter the file path: ")
+                if os.path.isfile(file_path):
+                        return file_path
+                else:
+                        print ("Invalid file path. Please enter a valid file path.")
+
 def main():
     #patch()
 
-    
     user_auth()
-    print("Emailing")
 
+    #prompt for mail list excel sheet (.xlsx,.xlsm,.xltx,.xltm)
+    email_list = prompt_for_file() #Could also be sys.argv[1]
+    print(f"Selected file: {email_list}")
     
-    
-    #prompt for mail list
     #prompt for template
     #prompt for sig name
     #mailFromExcel()
@@ -118,9 +125,6 @@ def main():
     
 
 if __name__ == "__main__":
-
-            
-    
     main()
 
     
