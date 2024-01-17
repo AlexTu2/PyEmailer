@@ -5,6 +5,8 @@ import openpyxl
 import string
 import bs4
 import re
+import os
+from contextlib import suppress
 
 class PatchError(Exception): pass
 
@@ -74,20 +76,50 @@ def mailFromExcel():
     #Start at 1 to skip header, "name" and "email"
     #for i in range (1, 3):
             #ezgmail.draft(data[i][1].value,'for {a}'.format(a=data[i][0].value), template, mimeSubtype='html')
-    
+
+def logout():
+    with suppress(OSError):
+        os.remove("token.json")
+
+def user_auth():
+    while True:
+        ezgmail.init()
+        print("Python Emailer, you're currently logged in as: {email}".format(email=ezgmail.EMAIL_ADDRESS))
+                                    
+        #prompt for user change
+        while True:
+                logout_choice = input("Do you want to logout? ((y)es / (n)o): ").lower()
+                if logout_choice in ("yes", "no" , "y", "n"):
+                        break
+                print("invalid input")
+                
+        if logout_choice in ("yes", "y"):
+                logout()
+                continue
+        else:
+                print("Sending email")
+                break
+        
 def main():
     #patch()
-    ezgmail.init()
+
+    
+    user_auth()
+    print("Emailing")
+
     
     
-    print(sys.argv[1])
-    print("Python Emailer, you're currently logged in as: {email}".format(email=ezgmail.EMAIL_ADDRESS))
-    mailFromExcel()
+    #prompt for mail list
+    #prompt for template
+    #prompt for sig name
+    #mailFromExcel()
     
     input("Enter to exit: ")
     
 
 if __name__ == "__main__":
+
+            
     
     main()
 
