@@ -100,9 +100,9 @@ def user_auth():
                 print("Continuing with email program")
                 break
         
-def prompt_for_file():
+def prompt_for_file(msg):
         while True:
-                file_path = input("Enter the file path: ")
+                file_path = input(f"{msg}: ")
                 if os.path.isfile(file_path):
                         return file_path
                 else:
@@ -114,17 +114,26 @@ def main():
     user_auth()
 
     #prompt for mail list excel sheet (.xlsx,.xlsm,.xltx,.xltm)
-    email_list = prompt_for_file() #Could also be sys.argv[1]
-    print(f"Selected file: {email_list}")
+    email_list = prompt_for_file("Enter mailing list file") #Could also be sys.argv[1]
+    print(f"Mailing list file: {email_list}")
     
     #prompt for template
+    template = prompt_for_file("Enter template file")
+    print(f"Template file: {template}")
+    
     #prompt for sig name
+    sig = prompt_for_file("Enter signature file")
+    print(f"Signature file: {sig}")
+    
     #mailFromExcel()
     
     input("Enter to exit: ")
     
 
 if __name__ == "__main__":
+
+            
+    
     main()
 
     
