@@ -47,6 +47,14 @@ def mailFromExcel():
     
     with open(r'Templates\promo.html','r') as infile:
             template = infile.read()
+            soup = bs4.BeautifulSoup(template, 'html.parser')
+
+    with open(r'Templates\sig.html','r') as infile:
+            sig = infile.read()
+
+    soup.body.append(bs4.BeautifulSoup(sig, 'html.parser'))
+    with open(r'Templates\combined.html','w') as outfile:
+            outfile.write(str(soup))
             
     field_names = [v[1] for v in string.Formatter().parse(template)]
 
@@ -55,8 +63,8 @@ def mailFromExcel():
 ##                print(cell.value)
     data = tuple(sheet.rows)
     #Start at 1 to skip header, "name" and "email"
-    for i in range (1, 3):
-            ezgmail.draft(data[i][1].value,'for {a}'.format(a=data[i][0].value), template, mimeSubtype='html')
+    #for i in range (1, 3):
+            #ezgmail.draft(data[i][1].value,'for {a}'.format(a=data[i][0].value), template, mimeSubtype='html')
     
 def main():
     #patch()
