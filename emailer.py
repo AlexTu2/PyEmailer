@@ -45,8 +45,9 @@ def mailFromExcel():
     org_name_col = "A"
     org_mail_col = "B"
     
-    temp_file = open(r'Templates\promo.html','r')
-    template = temp_file.read()
+    with open(r'Templates\promo.html','r') as infile:
+            template = infile.read()
+            
     field_names = [v[1] for v in string.Formatter().parse(template)]
 
 ##    for row in sheet.iter_rows(min_row=1, max_col=2, max_row=sheet.max_row):
@@ -54,10 +55,9 @@ def mailFromExcel():
 ##                print(cell.value)
     data = tuple(sheet.rows)
     #Start at 1 to skip header, "name" and "email"
-    #for i in range (1, sheet.max_row):
-            #ezgmail.draft(data[i][1].value,'for {a}'.format(a=data[i][0].value), template, mimeSubtype='html')
+    for i in range (1, 3):
+            ezgmail.draft(data[i][1].value,'for {a}'.format(a=data[i][0].value), template, mimeSubtype='html')
     
-    temp_file.close()		
 def main():
     #patch()
     ezgmail.init()
@@ -71,6 +71,7 @@ def main():
     
 
 if __name__ == "__main__":
+    
     main()
 
     
