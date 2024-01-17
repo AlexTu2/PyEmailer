@@ -4,6 +4,7 @@ import ezgmail
 import openpyxl
 import string
 import bs4
+import re
 
 class PatchError(Exception): pass
 
@@ -27,6 +28,14 @@ def patch():
 	with open(ezgmail_code_path, "w") as f:
 		f.truncate()
 		f.write(code_new)
+
+def prettify_except(soup_obj: bs4.BeautifulSoup, tag_name: str) -> str:
+    #https://stackoverflow.com/a/69589000/9091833
+    regex_string = "<{0}>.*<\/{0}>".format(tag_name)
+    regex = re.compile(regex_string, re.DOTALL)
+    replacing_txt = str(getattr(soup_obj, tag_name))
+    return re.sub(regex, replacing_txt, soup_obj.prettify())
+
 
 #batch of 20, complete list, range of rows, start row then quant,
 #add sent email date & time
@@ -54,7 +63,7 @@ def mailFromExcel():
 
     soup.body.append(bs4.BeautifulSoup(sig, 'html.parser'))
     with open(r'Templates\combined.html','w') as outfile:
-            outfile.write(str(soup))
+            outfile.write(prettify_except(soup, 'body'))
             
     field_names = [v[1] for v in string.Formatter().parse(template)]
 
