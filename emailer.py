@@ -7,6 +7,7 @@ import bs4
 import re
 import os
 from contextlib import suppress
+import argparse
 
 class PatchError(Exception): pass
 
@@ -113,8 +114,17 @@ def main():
 
     user_auth()
 
-    #prompt for mail list excel sheet (.xlsx,.xlsm,.xltx,.xltm)
-    email_list = prompt_for_file("Enter mailing list file") #Could also be sys.argv[1]
+    parser = argparse.ArgumentParser()
+    parser.add_argument("mail_list", help="The mailing list excel sheet (.xlsx,.xlsm,.xltx,.xltm)")
+    args = parser.parse_args()
+    print(type(args))
+
+    #get/prompt for mail list excel sheet (.xlsx,.xlsm,.xltx,.xltm)
+    if args.mail_list:
+            print("Sys.argv found!")
+            email_list = args.mail_list
+    else:
+            email_list = prompt_for_file("Enter mailing list file") 
     print(f"Mailing list file: {email_list}")
     
     #prompt for template
@@ -133,7 +143,7 @@ def main():
 if __name__ == "__main__":
 
             
-    
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
     main()
 
     
