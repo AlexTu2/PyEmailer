@@ -47,6 +47,16 @@ def patch():
 
 
 def prettify_except(soup_obj: bs4.BeautifulSoup, tag_name: str) -> str:
+    """
+    Prettify the BeautifulSoup object, excluding a specific tag.
+
+    Args:
+        soup_obj (bs4.BeautifulSoup): The BeautifulSoup object.
+        tag_name (str): The tag to exclude.
+
+    Returns:
+        str: The prettified HTML text excluding the specified tag.
+    """
     # https://stackoverflow.com/a/69589000/9091833
     regex_string = "<{0}>.*<\/{0}>".format(tag_name)
     regex = re.compile(regex_string, re.DOTALL)
