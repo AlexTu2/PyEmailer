@@ -47,8 +47,12 @@ def prettify_except(soup_obj: bs4.BeautifulSoup, tag_name: str) -> str:
 #use sent date to confirm if email needs to be sent again
 
 def mailFromExcel(mail_list, template, sig, _closing, _name):
-    wb = openpyxl.load_workbook(mail_list) #Todo do I need to close?
-    sheet = wb['Sheet1']
+    wb = openpyxl.load_workbook(mail_list)
+    try:
+        sheet = wb['Sheet1']
+        data = tuple(sheet.rows)
+    finally:
+        wb.close()
 
     #https://stackoverflow.com/questions/23332259/copy-cell-style-openpyxl
     
@@ -73,7 +77,7 @@ def mailFromExcel(mail_list, template, sig, _closing, _name):
 ##    for row in sheet.iter_rows(min_row=1, max_col=2, max_row=sheet.max_row):
 ##        for cell in row:
 ##                print(cell.value)
-    data = tuple(sheet.rows)
+    
 
     print(f"\nRows in sheet {sheet.max_row}")
     #Start at 1 to skip header, "name" and "email"
