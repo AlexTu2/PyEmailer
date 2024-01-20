@@ -93,9 +93,7 @@ def user_auth():
         ezgmail.init()
         print("=" * 80)
         print(
-            "Python Emailer, you're currently logged in as: {email}".format(
-                email=ezgmail.EMAIL_ADDRESS
-            )
+            f"Python Emailer, you're currently logged in as: {ezgmail.EMAIL_ADDRESS}"
         )
         print("=" * 80 + "\n\n")
 
