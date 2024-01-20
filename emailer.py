@@ -110,6 +110,7 @@ def prompt_for_file(msg):
 def main():
     #patch()
 
+    print(f"The cwd is: {os.getcwd()}")
     user_auth()
 
     parser = argparse.ArgumentParser()
