@@ -46,7 +46,7 @@ def prettify_except(soup_obj: bs4.BeautifulSoup, tag_name: str) -> str:
 #add sent email date & time
 #use sent date to confirm if email needs to be sent again
 
-def mailFromExcel(mail_list, template, sig, _closing, _name):
+def mail_from_excel(mail_list, template, sig, _closing, _name):
     wb = openpyxl.load_workbook(mail_list)
     try:
         sheet = wb['Sheet1']
@@ -54,11 +54,6 @@ def mailFromExcel(mail_list, template, sig, _closing, _name):
     finally:
         wb.close()
 
-    #https://stackoverflow.com/questions/23332259/copy-cell-style-openpyxl
-    
-    org_name_col = "A"
-    org_mail_col = "B"
-    
     with open(template,'r') as infile:
             template = infile.read()
             soup = bs4.BeautifulSoup(template, 'html.parser')
@@ -74,14 +69,9 @@ def mailFromExcel(mail_list, template, sig, _closing, _name):
             
     field_names = [v[1] for v in string.Formatter().parse(template)]
 
-##    for row in sheet.iter_rows(min_row=1, max_col=2, max_row=sheet.max_row):
-##        for cell in row:
-##                print(cell.value)
-    
-
     print(f"Rows in sheet {sheet.max_row}")
     #Start at 1 to skip header, "name" and "email"
-    for i in range (1, 3):
+    for i in range (1, sheet.max_row):
             ezgmail.draft(data[i][1].value,f'Mail for {data[i][0].value}', message.format(closing=_closing, name=_name), mimeSubtype='html')
 
 def logout():
@@ -183,7 +173,7 @@ def main():
 
     
     print("\n\n")
-    mailFromExcel(mail_list, template, sig, closing, name)
+    mail_from_excel(mail_list, template, sig, closing, name)
     
     input("Enter to exit: ")
     
