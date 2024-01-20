@@ -44,12 +44,8 @@ def prettify_except(soup_obj: bs4.BeautifulSoup, tag_name: str) -> str:
 #add sent email date & time
 #use sent date to confirm if email needs to be sent again
 
-def mailFromExcel():
-    #Assuming that we pass in args for the file
-    email_list = sys.argv[1]
-    print(email_list)
-    
-    wb = openpyxl.load_workbook(email_list) #Todo do I need to close?
+def mailFromExcel(mail_list, template, sig, _closing, _name):
+    wb = openpyxl.load_workbook(mail_list) #Todo do I need to close?
     sheet = wb['Sheet1']
 
     #https://stackoverflow.com/questions/23332259/copy-cell-style-openpyxl
@@ -57,11 +53,11 @@ def mailFromExcel():
     org_name_col = "A"
     org_mail_col = "B"
     
-    with open(r'Templates\promo.html','r') as infile:
+    with open(template,'r') as infile:
             template = infile.read()
             soup = bs4.BeautifulSoup(template, 'html.parser')
 
-    with open(r'Templates\sig.html','r') as infile:
+    with open(sig,'r') as infile:
             sig = infile.read()
 
     soup.body.append(bs4.BeautifulSoup(sig, 'html.parser'))
@@ -77,8 +73,8 @@ def mailFromExcel():
 ##                print(cell.value)
     data = tuple(sheet.rows)
     #Start at 1 to skip header, "name" and "email"
-    #for i in range (1, 3):
-            #ezgmail.draft(data[i][1].value,'Imprinted Apparel for {a}'.format(a=data[i][0].value), message.format(closing='Best', name='Alex Tu'), mimeSubtype='html')
+    for i in range (1, 3):
+            ezgmail.draft(data[i][1].value,'Imprinted Apparel for {a}'.format(a=data[i][0].value), message.format(closing='Best', name='Alex Tu'), mimeSubtype='html')
 
 def logout():
     with suppress(OSError):
@@ -125,10 +121,10 @@ def main():
     #get/prompt for mail list excel sheet (.xlsx,.xlsm,.xltx,.xltm)
     if args.mail_list:
             print("Sys.argv found!")
-            email_list = args.mail_list
+            mail_list = args.mail_list
     else:
-            email_list = prompt_for_file("Enter mailing list file") 
-    print(f"Mailing list file: {email_list}")
+            mail_list = prompt_for_file("Enter mailing list file") 
+    print(f"Mailing list file: {mail_list}")
     
     #prompt for template
     template = prompt_for_file("Enter template file")
@@ -138,7 +134,14 @@ def main():
     sig = prompt_for_file("Enter signature file")
     print(f"Signature file: {sig}")
     
-    #mailFromExcel()
+    #Prompt for closing
+    closing = input("Enter a greeting (Best, Best regards, Signed, etc.): ")
+    
+    #Prompt for name
+    name = input("Enter a name to come after the greeting: ")
+
+    
+    mailFromExcel(mail_list, template, sig, greeting, name)
     
     input("Enter to exit: ")
     
