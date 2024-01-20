@@ -11,6 +11,7 @@ import ezgmail
 import bs4
 
 class PatchError(Exception):
+    """Custom exception raised when there is an issue applying a patch."""
     pass
 
 
