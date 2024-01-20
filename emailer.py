@@ -78,7 +78,7 @@ def mailFromExcel():
     data = tuple(sheet.rows)
     #Start at 1 to skip header, "name" and "email"
     #for i in range (1, 3):
-            #ezgmail.draft(data[i][1].value,'Imprinted Apparel for {a}'.format(a=data[i][0].value), message.format(greeting='Best', name='Alex Tu'), mimeSubtype='html')
+            #ezgmail.draft(data[i][1].value,'Imprinted Apparel for {a}'.format(a=data[i][0].value), message.format(closing='Best', name='Alex Tu'), mimeSubtype='html')
 
 def logout():
     with suppress(OSError):
