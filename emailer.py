@@ -159,9 +159,18 @@ def user_auth():
             break
 
 
-def prompt_for_file(msg):
+def prompt_for_file(prompt):
+    """
+    Prompt the user to enter a file path.
+
+    Args:
+        msg (str): The prompt message.
+
+    Returns:
+        str: The entered file path.
+    """
     while True:
-        file_path = input(f"\n{msg}: ")
+        file_path = input(f"\n{prompt}: ")
         if os.path.isfile(file_path):
             return file_path
         else:
