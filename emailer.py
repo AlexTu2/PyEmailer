@@ -74,6 +74,8 @@ def mailFromExcel(mail_list, template, sig, _closing, _name):
 ##        for cell in row:
 ##                print(cell.value)
     data = tuple(sheet.rows)
+
+    print(f"Rows in sheet {sheet.max_row}")
     #Start at 1 to skip header, "name" and "email"
     for i in range (1, 3):
             ezgmail.draft(data[i][1].value,'Imprinted Apparel for {a}'.format(a=data[i][0].value), message.format(closing='Best', name='Alex Tu'), mimeSubtype='html')
@@ -85,8 +87,10 @@ def logout():
 def user_auth():
     while True:
         ezgmail.init()
+        print("="*80)
         print("Python Emailer, you're currently logged in as: {email}".format(email=ezgmail.EMAIL_ADDRESS))
-                                    
+        print("="*80+"\n\n")
+
         #prompt for user change
         while True:
                 logout_choice = input("Do you want to logout? ((y)es / (N)o): ").lower()
@@ -98,12 +102,12 @@ def user_auth():
                 logout()
                 continue
         else:
-                print("Continuing with email program")
+                print("Continuing with email program... \n")
                 break
         
 def prompt_for_file(msg):
         while True:
-                file_path = input(f"{msg}: ")
+                file_path = input(f"\n{msg}: ")
                 if os.path.isfile(file_path):
                         return file_path
                 else:
@@ -140,7 +144,7 @@ def main():
 
     #get/prompt for mail list excel sheet (.xlsx,.xlsm,.xltx,.xltm)
     if args.mail_list:
-            print("Sys.argv found!")
+            #print("Sys.argv found!")
             mail_list = args.mail_list
     else:
             if using_GUI_filedialog:
@@ -148,7 +152,7 @@ def main():
                     mail_list = filedialog.askopenfilename()
             else:
                     mail_list = prompt_for_file("Enter mailing list file") 
-    print(f"Mailing list file: {mail_list}")
+    print(f"\nMailing list file: {mail_list}")
     
     #prompt for template
     if using_GUI_filedialog:
@@ -156,7 +160,7 @@ def main():
             template = filedialog.askopenfilename()
     else:
         template = prompt_for_file("Enter template file")
-    print(f"Template file: {template}")
+    print(f"\nTemplate file: {template}")
     
     #prompt for sig name
     if using_GUI_filedialog:
@@ -164,9 +168,10 @@ def main():
             sig = filedialog.askopenfilename()
     else: 
         sig = prompt_for_file("Enter signature file")
-    print(f"Signature file: {sig}")
+    print(f"\nSignature file: {sig}")
     
     #Prompt for closing
+    print("="*80+"\n")
     closing = input("Enter a greeting (Best, Best regards, Signed, etc.): ")
     
     #Prompt for name
