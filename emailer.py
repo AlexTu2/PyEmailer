@@ -89,8 +89,8 @@ def user_auth():
                                     
         #prompt for user change
         while True:
-                logout_choice = input("Do you want to logout? ((y)es / (n)o): ").lower()
-                if logout_choice in ("yes", "no" , "y", "n"):
+                logout_choice = input("Do you want to logout? ((y)es / (N)o): ").lower()
+                if logout_choice in ("yes", "no" , "y", "n", ""):
                         break
                 print("invalid input")
                 
@@ -128,7 +128,7 @@ def main():
 
     #Determine if user will use gui tk file prompt or cmdline input
     while True:
-        GUI_choice = input("Do you wish to use the GUI File picker? (Y)es/(n)o: " ).lower()
+        GUI_choice = input("Do you wish to use the GUI File picker? (Y)es/(n)o: ").lower()
         if GUI_choice in ("yes", "no", "y", "n", ""):
                 break
         print("Invalid choice, please retry. ")
@@ -137,7 +137,7 @@ def main():
     else:
         using_GUI_filedialog = False
 
-        
+
     #get/prompt for mail list excel sheet (.xlsx,.xlsm,.xltx,.xltm)
     if args.mail_list:
             print("Sys.argv found!")
