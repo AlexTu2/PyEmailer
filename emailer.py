@@ -120,9 +120,9 @@ def main():
     user_auth()
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("mail_list", help="The mailing list excel sheet (.xlsx,.xlsm,.xltx,.xltm)")
-    #args = parser.parse_args()
-    args = parser.parse_args([r"Mail lists\example.xlsx"])
+    parser.add_argument("-m","--mail_list", help="The mailing list excel sheet (.xlsx,.xlsm,.xltx,.xltm)")
+    args = parser.parse_args()
+    #args = parser.parse_args([r"Mail lists\example.xlsx"])
     print(type(args))
 
     root = tk.Tk()
