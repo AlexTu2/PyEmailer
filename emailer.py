@@ -130,7 +130,7 @@ def logout():
 
 
 def user_auth():
-     """
+    """
     Authenticate the user with the ezgmail library.
 
     This function initializes the ezgmail library and prompts the user to log out
@@ -178,6 +178,22 @@ def prompt_for_file(prompt):
 
 
 def select_file_dialog(prompt, root, cwd):
+    """
+    Display a file selection dialog.
+
+    Args:
+        prompt (str): The prompt message.
+        root (tk.Tk): The Tkinter root window for the file dialog.
+        cwd (str): The current working directory.
+
+    Returns:
+        str: The selected file path.
+
+    Note:
+        This function opens a file selection dialog with the specified prompt,
+        using the Tkinter root window and the current working directory.
+
+    """
     print(prompt)
     return filedialog.askopenfilename(parent=root, initialdir=cwd)
 
