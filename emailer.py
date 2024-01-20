@@ -130,6 +130,12 @@ def logout():
 
 
 def user_auth():
+     """
+    Authenticate the user with the ezgmail library.
+
+    This function initializes the ezgmail library and prompts the user to log out
+    or continue with the email program.
+    """
     while True:
         ezgmail.init()
         print("=" * 80)
