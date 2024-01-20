@@ -8,6 +8,8 @@ import re
 import os
 from contextlib import suppress
 import argparse
+import tkinter as tk
+from tkinter import filedialog
 
 class PatchError(Exception): pass
 
@@ -119,20 +121,49 @@ def main():
     args = parser.parse_args([r"Mail lists\example.xlsx"])
     print(type(args))
 
+    root = tk.Tk()
+    root.withdraw()
+    #file_path = filedialog.askopenfilename()
+    #using_GUI_filedialog = True
+
+    #Determine if user will use gui tk file prompt or cmdline input
+    while True:
+        GUI_choice = input("Do you wish to use the GUI File picker? (Y)es/(n)o: " ).lower()
+        if GUI_choice in ("yes", "no", "y", "n", ""):
+                break
+        print("Invalid choice, please retry. ")
+    if GUI_choice in ("yes", "y", ""):
+        using_GUI_filedialog = True
+    else:
+        using_GUI_filedialog = False
+
+        
     #get/prompt for mail list excel sheet (.xlsx,.xlsm,.xltx,.xltm)
     if args.mail_list:
             print("Sys.argv found!")
             mail_list = args.mail_list
     else:
-            mail_list = prompt_for_file("Enter mailing list file") 
+            if using_GUI_filedialog:
+                    print("Select a mailing list file")
+                    mail_list = filedialog.askopenfilename()
+            else:
+                    mail_list = prompt_for_file("Enter mailing list file") 
     print(f"Mailing list file: {mail_list}")
     
     #prompt for template
-    template = prompt_for_file("Enter template file")
+    if using_GUI_filedialog:
+            print("Select a template file")
+            template = filedialog.askopenfilename()
+    else:
+        template = prompt_for_file("Enter template file")
     print(f"Template file: {template}")
     
     #prompt for sig name
-    sig = prompt_for_file("Enter signature file")
+    if using_GUI_filedialog:
+            print("Select a signature file")
+            sig = filedialog.askopenfilename()
+    else: 
+        sig = prompt_for_file("Enter signature file")
     print(f"Signature file: {sig}")
     
     #Prompt for closing
