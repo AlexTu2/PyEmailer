@@ -75,7 +75,7 @@ def mailFromExcel(mail_list, template, sig, _closing, _name):
 ##                print(cell.value)
     data = tuple(sheet.rows)
 
-    print(f"Rows in sheet {sheet.max_row}")
+    print(f"\nRows in sheet {sheet.max_row}")
     #Start at 1 to skip header, "name" and "email"
     for i in range (1, 3):
             ezgmail.draft(data[i][1].value,'Imprinted Apparel for {a}'.format(a=data[i][0].value), message.format(closing='Best', name='Alex Tu'), mimeSubtype='html')
@@ -178,6 +178,7 @@ def main():
     name = input("Enter a name to come after the greeting: ")
 
     
+    print("\n\n")
     mailFromExcel(mail_list, template, sig, greeting, name)
     
     input("Enter to exit: ")
