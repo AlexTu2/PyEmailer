@@ -1,15 +1,14 @@
 import sys
 import os
-import ezgmail
-import openpyxl
 import string
-import bs4
 import re
-from contextlib import suppress
 import argparse
 import tkinter as tk
 from tkinter import filedialog
-
+from contextlib import suppress
+import openpyxl
+import ezgmail
+import bs4
 
 class PatchError(Exception):
     pass
