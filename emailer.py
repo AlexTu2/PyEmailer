@@ -119,6 +119,12 @@ def mail_from_excel(mail_list, template, sig, _closing, _name):
 
 
 def logout():
+    """
+    Log out the user by removing the token.json file.
+
+    Notes:
+        If the token.json file is present, it will be removed.
+    """
     with suppress(OSError):
         os.remove("token.json")
 
