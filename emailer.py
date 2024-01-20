@@ -70,6 +70,21 @@ def prettify_except(soup_obj: bs4.BeautifulSoup, tag_name: str) -> str:
 
 
 def mail_from_excel(mail_list, template, sig, _closing, _name):
+    """
+    Compose and draft emails based on data from an Excel sheet.
+
+    Args:
+        mail_list (str): Path to the mailing list Excel sheet.
+        template (str): Path to the email template file.
+        sig (str): Path to the signature file.
+        _closing (str): The closing phrase for the email.
+        _name (str): The name to come after the closing.
+
+    Notes:
+        The email content is composed using the provided template, signature, closing,
+        and name. Draft emails are created for each row in the Excel sheet.
+
+    """
     wb = openpyxl.load_workbook(mail_list)
     try:
         sheet = wb["Sheet1"]
