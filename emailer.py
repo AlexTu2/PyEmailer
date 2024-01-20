@@ -120,14 +120,13 @@ def prompt_for_file(msg):
 def main():
     #patch()
 
-    print(f"The cwd is: {os.getcwd()}")
     user_auth()
+    print(f"The cwd is: {os.getcwd()}")
 
     parser = argparse.ArgumentParser()
     parser.add_argument("-m","--mail_list", help="The mailing list excel sheet (.xlsx,.xlsm,.xltx,.xltm)")
     args = parser.parse_args()
     #args = parser.parse_args([r"Mail lists\example.xlsx"])
-    print(type(args))
 
     root = tk.Tk()
     root.withdraw()
@@ -144,6 +143,7 @@ def main():
         using_GUI_filedialog = True
     else:
         using_GUI_filedialog = False
+    print("="*80+"\n")
 
 
     #get/prompt for mail list excel sheet (.xlsx,.xlsm,.xltx,.xltm)
@@ -156,7 +156,7 @@ def main():
                     mail_list = filedialog.askopenfilename()
             else:
                     mail_list = prompt_for_file("Enter mailing list file") 
-    print(f"\nMailing list file: {mail_list}")
+    print(f"Mailing list file: {mail_list}\n")
     
     #prompt for template
     if using_GUI_filedialog:
@@ -164,7 +164,7 @@ def main():
             template = filedialog.askopenfilename()
     else:
         template = prompt_for_file("Enter template file")
-    print(f"\nTemplate file: {template}")
+    print(f"Template file: {template}\n")
     
     #prompt for sig name
     if using_GUI_filedialog:
@@ -172,7 +172,7 @@ def main():
             sig = filedialog.askopenfilename()
     else: 
         sig = prompt_for_file("Enter signature file")
-    print(f"\nSignature file: {sig}")
+    print(f"Signature file: {sig}\n")
     
     #Prompt for closing
     print("="*80+"\n")
