@@ -111,17 +111,13 @@ def main():
     #patch()
 
     user_auth()
-    print(f"The cwd is: {os.getcwd()}")
+    cwd = os.getcwd()
+    print(f"The cwd is: {cwd}")
 
     parser = argparse.ArgumentParser()
     parser.add_argument("-m","--mail_list", help="The mailing list excel sheet (.xlsx,.xlsm,.xltx,.xltm)")
     args = parser.parse_args()
     #args = parser.parse_args([r"Mail lists\example.xlsx"])
-
-    root = tk.Tk()
-    root.withdraw()
-    #file_path = filedialog.askopenfilename()
-    #using_GUI_filedialog = True
 
     #Determine if user will use gui tk file prompt or cmdline input
     while True:
@@ -129,8 +125,13 @@ def main():
         if GUI_choice in ("yes", "no", "y", "n", ""):
                 break
         print("Invalid choice, please retry. ")
+        
     if GUI_choice in ("yes", "y", ""):
         using_GUI_filedialog = True
+        root = tk.Tk()
+        root.withdraw()
+        root.lift()
+        root.focus_force()
     else:
         using_GUI_filedialog = False
     print("="*80+"\n")
@@ -143,7 +144,7 @@ def main():
     else:
             if using_GUI_filedialog:
                     print("Select a mailing list file")
-                    mail_list = filedialog.askopenfilename()
+                    mail_list = filedialog.askopenfilename(parent=root,initialdir=cwd)
             else:
                     mail_list = prompt_for_file("Enter mailing list file") 
     print(f"Mailing list file: {mail_list}\n")
@@ -151,7 +152,7 @@ def main():
     #prompt for template
     if using_GUI_filedialog:
             print("Select a template file")
-            template = filedialog.askopenfilename()
+            template = filedialog.askopenfilename(parent=root,initialdir=cwd)
     else:
         template = prompt_for_file("Enter template file")
     print(f"Template file: {template}\n")
@@ -159,7 +160,7 @@ def main():
     #prompt for sig name
     if using_GUI_filedialog:
             print("Select a signature file")
-            sig = filedialog.askopenfilename()
+            sig = filedialog.askopenfilename(parent=root,initialdir=cwd)
     else: 
         sig = prompt_for_file("Enter signature file")
     print(f"Signature file: {sig}\n")
