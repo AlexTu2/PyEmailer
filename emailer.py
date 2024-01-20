@@ -107,6 +107,10 @@ def prompt_for_file(msg):
                 else:
                         print ("Invalid file path. Please enter a valid file path.")
 
+def select_file_dialog(prompt):
+    print(prompt)
+    return filedialog.askopenfilename(parent=root, initialdir=cwd)
+
 def main():
     #patch()
 
@@ -143,24 +147,21 @@ def main():
             mail_list = args.mail_list
     else:
             if using_GUI_filedialog:
-                    print("Select a mailing list file")
-                    mail_list = filedialog.askopenfilename(parent=root,initialdir=cwd)
+                    mail_list = select_file_dialog("Select a mailing list file")
             else:
                     mail_list = prompt_for_file("Enter mailing list file") 
     print(f"Mailing list file: {mail_list}\n")
     
     #prompt for template
     if using_GUI_filedialog:
-            print("Select a template file")
-            template = filedialog.askopenfilename(parent=root,initialdir=cwd)
+            template = select_file_dialog("Select a template file")
     else:
         template = prompt_for_file("Enter template file")
     print(f"Template file: {template}\n")
     
     #prompt for sig name
     if using_GUI_filedialog:
-            print("Select a signature file")
-            sig = filedialog.askopenfilename(parent=root,initialdir=cwd)
+            sig = select_file_dialog("Select a signature file")
     else: 
         sig = prompt_for_file("Enter signature file")
     print(f"Signature file: {sig}\n")
