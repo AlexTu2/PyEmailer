@@ -16,6 +16,15 @@ class PatchError(Exception):
 
 
 def patch():
+    """
+    Apply a patch to the ezgmail library by modifying its version information.
+
+    This function reads the content of the ezgmail library, checks its version,
+    and applies a patch if the version is compatible. The patched version is then saved.
+
+    Raises:
+        PatchError: If the patch cannot be applied due to an invalid version.
+    """
     site_packages = sys.path[5]
     ezgmail_code_path = os.path.join(site_packages, "ezgmail", "__init__.py")
     # __version__ = \"2022.10.10\"
