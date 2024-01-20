@@ -172,14 +172,14 @@ def main():
     
     #Prompt for closing
     print("="*80+"\n")
-    closing = input("Enter a greeting (Best, Best regards, Signed, etc.): ")
+    closing = input("Enter a closing (Best, Best regards, Signed, etc.): ")
     
     #Prompt for name
-    name = input("Enter a name to come after the greeting: ")
+    name = input("Enter a name to come after the closing: ")
 
     
     print("\n\n")
-    mailFromExcel(mail_list, template, sig, greeting, name)
+    mailFromExcel(mail_list, template, sig, closing, name)
     
     input("Enter to exit: ")
     
