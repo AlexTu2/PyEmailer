@@ -144,14 +144,14 @@ def main():
 
     # Determine if user will use gui tk file prompt or cmdline input
     while True:
-        GUI_choice = input(
+        gui_choice = input(
             "Do you wish to use the GUI File picker? (Y)es/(n)o: "
         ).lower()
-        if GUI_choice in ("yes", "no", "y", "n", ""):
+        if gui_choice in ("yes", "no", "y", "n", ""):
             break
         print("Invalid choice, please retry. ")
 
-    if GUI_choice in ("yes", "y", ""):
+    if gui_choice in ("yes", "y", ""):
         using_GUI_filedialog = True
         root = tk.Tk()
         root.withdraw()
