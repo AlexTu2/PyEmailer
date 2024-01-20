@@ -199,6 +199,12 @@ def select_file_dialog(prompt, root, cwd):
 
 
 def main():
+    """
+    The main function to run the email program.
+
+    This function orchestrates the email program, handling user authentication,
+    file selection, and email composition based on an Excel sheet.
+    """
     # patch()
 
     user_auth()
