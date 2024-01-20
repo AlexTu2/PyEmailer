@@ -118,7 +118,8 @@ def main():
 
     parser = argparse.ArgumentParser()
     parser.add_argument("mail_list", help="The mailing list excel sheet (.xlsx,.xlsm,.xltx,.xltm)")
-    args = parser.parse_args()
+    #args = parser.parse_args()
+    args = parser.parse_args([r"Mail lists\example.xlsx"])
     print(type(args))
 
     #get/prompt for mail list excel sheet (.xlsx,.xlsm,.xltx,.xltm)
