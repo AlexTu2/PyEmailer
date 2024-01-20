@@ -152,13 +152,13 @@ def main():
         print("Invalid choice, please retry. ")
 
     if gui_choice in ("yes", "y", ""):
-        using_GUI_filedialog = True
+        using_gui_filedialog = True
         root = tk.Tk()
         root.withdraw()
         root.lift()
         root.focus_force()
     else:
-        using_GUI_filedialog = False
+        using_gui_filedialog = False
     print("=" * 80 + "\n")
 
     # get/prompt for mail list excel sheet (.xlsx,.xlsm,.xltx,.xltm)
@@ -166,21 +166,21 @@ def main():
         # print("Sys.argv found!")
         mail_list = args.mail_list
     else:
-        if using_GUI_filedialog:
+        if using_gui_filedialog:
             mail_list = select_file_dialog("Select a mailing list file", root, cwd)
         else:
             mail_list = prompt_for_file("Enter mailing list file")
     print(f"Mailing list file: {mail_list}\n")
 
     # prompt for template
-    if using_GUI_filedialog:
+    if using_gui_filedialog:
         template = select_file_dialog("Select a template file", root, cwd)
     else:
         template = prompt_for_file("Enter template file")
     print(f"Template file: {template}\n")
 
     # prompt for sig name
-    if using_GUI_filedialog:
+    if using_gui_filedialog:
         sig = select_file_dialog("Select a signature file", root, cwd)
     else:
         sig = prompt_for_file("Enter signature file")
