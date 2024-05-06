@@ -1,0 +1,3 @@
+[submodule "ezgmail"]
+	path = ezgmail
+	url = https://github.com/asweigart/ezgmail.git
